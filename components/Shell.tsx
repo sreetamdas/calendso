@@ -1,6 +1,7 @@
 import { SelectorIcon } from "@heroicons/react/outline";
 import {
   CalendarIcon,
+  ChartPieIcon,
   ClockIcon,
   CogIcon,
   ExternalLinkIcon,
@@ -150,6 +151,12 @@ export default function Shell(props: {
       href: "/integrations",
       icon: PuzzleIcon,
       current: router.asPath.startsWith("/integrations"),
+    },
+    {
+      name: t("reports"),
+      href: "/reports",
+      icon: ChartPieIcon,
+      current: router.asPath.startsWith("/reports"),
     },
     {
       name: t("settings"),
