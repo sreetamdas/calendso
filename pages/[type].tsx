@@ -20,7 +20,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const ssr = await ssrInit(context);
   // get query params and typecast them to string
   // (would be even better to assert them instead of typecasting)
-  const userParam = asStringOrNull(context.query.user);
+  const userParam = asStringOrNull(process.env.NEXT_PUBLIC_SINGLETON_USERNAME);
   const typeParam = asStringOrNull(context.query.type);
   const dateParam = asStringOrNull(context.query.date);
 
