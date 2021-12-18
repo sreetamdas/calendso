@@ -58,6 +58,10 @@ export const viewerTeamsRouter = createProtectedRouter()
       name: z.string(),
     }),
     async resolve({ ctx, input }) {
+      if (ctx.user.plan === "FREE") {
+        throw new TRPCError({ code: "UNAUTHORIZED", message: "You are not a pro user." });
+      }
+
       const slug = slugify(input.name);
 
       const nameCollisions = await ctx.prisma.team.count({
@@ -159,7 +163,7 @@ export const viewerTeamsRouter = createProtectedRouter()
 
       await ctx.prisma.membership.delete({
         where: {
-          userId_teamId: { userId: ctx.user?.id, teamId: input.teamId },
+          userId_teamId: { userId: input.memberId, teamId: input.teamId },
         },
       });
     },
